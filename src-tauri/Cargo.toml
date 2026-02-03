@@ -1,0 +1,51 @@
+[package]
+name = "openmusic"
+version = "0.1.0"
+description = "AI-powered music composition and MIDI generation"
+authors = ["you"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0", features = ["devtools"] }
+tauri-plugin-dialog = "2.0"
+tauri-plugin-fs = "2.0"
+tauri-plugin-shell = "2.0"
+tauri-plugin-store = "2.0"
+
+# Audio dependencies
+rodio = "0.19"
+cpal = "0.15"
+
+# MIDI dependencies
+midir = "0.9"
+midly = "0.5"
+
+# HTTP client for AI providers
+reqwest = { version = "0.12", features = ["json"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Directory paths
+dirs = "5.0"
+
+# Archive extraction for CLIProxyAPI download
+zip = "2.2"
+flate2 = "1.0"
+tar = "0.4"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

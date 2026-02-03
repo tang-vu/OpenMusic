@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenMusic - Main Layout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': '#0D0D0F',
+            'bg-secondary': '#16161A',
+            'bg-tertiary': '#1E1E24',
+            'accent-primary': '#7C3AED',
+            'accent-secondary': '#06B6D4',
+            'accent-success': '#22C55E',
+            'text-primary': '#F4F4F5',
+            'text-secondary': '#A1A1AA',
+            'text-muted': '#52525B',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #0D0D0F; }
+    .tab-active { background: #7C3AED; color: white; }
+    .waveform-bar { animation: wave 1.2s ease-in-out infinite; }
+    .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+    .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+    .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+    .waveform-bar:nth-child(5) { animation-delay: 0.4s; }
+    @keyframes wave {
+      0%, 100% { height: 20%; }
+      50% { height: 80%; }
+    }
+  </style>
+</head>
+<body class="font-sans text-text-primary min-h-screen flex flex-col">
+
+  <!-- HEADER - 56px fixed -->
+  <header class="h-14 bg-bg-secondary border-b border-text-muted/20 flex items-center justify-between px-4 shrink-0">
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-accent-primary rounded-lg flex items-center justify-center">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-lg">OpenMusic</span>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="flex bg-bg-tertiary rounded-lg p-1 gap-1">
+      <button class="tab-active px-4 py-1.5 rounded-md text-sm font-medium transition-all">Lyrics</button>
+      <button class="px-4 py-1.5 rounded-md text-sm font-medium text-text-secondary hover:text-text-primary transition-all">Beats</button>
+      <button class="px-4 py-1.5 rounded-md text-sm font-medium text-text-secondary hover:text-text-primary transition-all">Mix</button>
+    </nav>
+
+    <!-- AI Assistant Button -->
+    <button class="flex items-center gap-2 bg-accent-secondary/20 text-accent-secondary px-3 py-1.5 rounded-lg hover:bg-accent-secondary/30 transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+      </svg>
+      <span class="text-sm font-medium">AI Help</span>
+    </button>
+  </header>
+
+  <!-- MAIN CONTENT - Flexible -->
+  <main class="flex-1 p-4 overflow-hidden">
+    <div class="bg-bg-secondary rounded-xl h-full p-6 flex flex-col">
+      <!-- Content Header -->
+      <div class="flex items-center justify-between mb-4">
+        <h1 class="text-xl font-semibold">Lyrics Editor</h1>
+        <div class="flex gap-2">
+          <button class="px-3 py-1.5 text-sm bg-bg-tertiary rounded-lg text-text-secondary hover:text-text-primary">
+            Import
+          </button>
+          <button class="px-3 py-1.5 text-sm bg-accent-primary rounded-lg text-white hover:brightness-110">
+            Save
+          </button>
+        </div>
+      </div>
+
+      <!-- Placeholder Content Area -->
+      <div class="flex-1 bg-bg-tertiary rounded-lg flex items-center justify-center">
+        <p class="text-text-muted">Content area - see specific wireframes for details</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- PLAYER BAR - 72px fixed -->
+  <footer class="h-18 bg-bg-secondary border-t border-text-muted/20 px-4 py-3 shrink-0">
+    <div class="flex items-center gap-6 h-full">
+      <!-- Playback Controls -->
+      <div class="flex items-center gap-2">
+        <button class="w-10 h-10 flex items-center justify-center text-text-secondary hover:text-text-primary">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+        </button>
+        <button class="w-12 h-12 bg-accent-success rounded-full flex items-center justify-center hover:brightness-110 transition-all">
+          <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <button class="w-10 h-10 flex items-center justify-center text-text-secondary hover:text-text-primary">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Waveform / Progress -->
+      <div class="flex-1 flex items-center gap-3">
+        <span class="text-xs text-text-secondary w-10">0:00</span>
+        <div class="flex-1 h-10 bg-bg-tertiary rounded-lg flex items-end justify-center gap-0.5 px-2 overflow-hidden">
+          <!-- Animated waveform bars -->
+          <div class="waveform-bar w-1 bg-accent-primary rounded-t"></div>
+          <div class="waveform-bar w-1 bg-accent-primary rounded-t"></div>
+          <div class="waveform-bar w-1 bg-accent-primary rounded-t"></div>
+          <div class="waveform-bar w-1 bg-accent-primary rounded-t"></div>
+          <div class="waveform-bar w-1 bg-accent-primary rounded-t"></div>
+          <div class="w-1 h-[30%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[50%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[40%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[60%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[35%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[45%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[55%] bg-text-muted/30 rounded-t"></div>
+          <div class="w-1 h-[25%] bg-text-muted/30 rounded-t"></div>
+        </div>
+        <span class="text-xs text-text-secondary w-10">3:24</span>
+      </div>
+
+      <!-- Volume -->
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-text-secondary" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+        </svg>
+        <div class="w-20 h-1 bg-bg-tertiary rounded-full">
+          <div class="w-3/4 h-full bg-text-secondary rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ANNOTATION: Layout Structure -->
+  <div class="fixed bottom-20 right-4 bg-accent-primary/90 text-white text-xs p-3 rounded-lg max-w-xs">
+    <strong>Layout Notes:</strong>
+    <ul class="mt-1 space-y-1 text-white/80">
+      <li>• Header: 56px fixed, contains nav tabs</li>
+      <li>• Content: Flexible, scrollable panels</li>
+      <li>• Player: 72px fixed, always visible</li>
+      <li>• Single window, no nested routes</li>
+    </ul>
+  </div>
+</body>
+</html>
