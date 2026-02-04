@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAISkills } from '@/hooks/use-ai-skills';
 import { LyricsAIQuickActions } from './lyrics-ai-quick-actions';
+import { useTranslation } from '@/lib/i18n';
 
 interface AISuggestionsPanelProps {
   onClose: () => void;
@@ -22,6 +23,7 @@ export function AISuggestionsPanel({
   selectedText,
   onInsertSuggestion,
 }: AISuggestionsPanelProps) {
+  const { t } = useTranslation();
   const [customPrompt, setCustomPrompt] = useState('');
   const [suggestion, setSuggestion] = useState<string | null>(null);
   const { complete, isLoading, error, activeSkill } = useAISkills({
@@ -59,7 +61,7 @@ export function AISuggestionsPanel({
     <div className="w-80 flex flex-col gap-4">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">AI Lyrics Assistant</h3>
+        <h3 className="text-lg font-semibold">{t('lyrics.aiSuggestions')}</h3>
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-white transition-colors"
@@ -73,7 +75,7 @@ export function AISuggestionsPanel({
 
       {/* Quick Actions */}
       <Card>
-        <p className="text-sm text-gray-400 mb-3">Quick Actions</p>
+        <p className="text-sm text-gray-400 mb-3">{t('lyrics.quickActions')}</p>
         <LyricsAIQuickActions
           onAction={handleAction}
           currentLyrics={currentLyrics}
@@ -99,7 +101,7 @@ export function AISuggestionsPanel({
             className="mt-2 w-full"
             disabled={isLoading || !customPrompt.trim()}
           >
-            {isLoading ? 'Generating...' : 'Generate'}
+            {isLoading ? t('common.loading') : t('ai.generate')}
           </Button>
         </form>
       </Card>
@@ -124,11 +126,11 @@ export function AISuggestionsPanel({
                 variant="ghost"
                 onClick={() => setSuggestion(null)}
               >
-                Clear
+                {t('lyrics.clear')}
               </Button>
               {onInsertSuggestion && (
                 <Button size="sm" onClick={handleInsert}>
-                  Insert
+                  {t('lyrics.insert')}
                 </Button>
               )}
             </div>

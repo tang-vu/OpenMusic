@@ -1,32 +1,44 @@
-import { useUIStore, type ActiveTab } from '../../stores/ui-store';
+/**
+ * Tab Navigation Component
+ * Main navigation tabs with i18n support
+ */
 
-const tabs: { id: ActiveTab; label: string }[] = [
-  { id: 'lyrics', label: 'Lyrics' },
-  { id: 'beats', label: 'Beats' },
-  { id: 'player', label: 'Player' },
-  { id: 'ai', label: 'AI' },
-  { id: 'settings', label: 'Settings' },
-];
+import { useUIStore, type ActiveTab } from '@/stores/ui-store';
+import { useTranslation } from '@/lib/i18n';
+
+const tabIds: ActiveTab[] = ['lyrics', 'beats', 'player', 'ai', 'settings'];
 
 export function TabNavigation() {
   const { activeTab, setActiveTab } = useUIStore();
+  const { t } = useTranslation();
+
+  const getTabLabel = (id: ActiveTab): string => {
+    switch (id) {
+      case 'lyrics': return t('nav.lyrics');
+      case 'beats': return t('nav.beats');
+      case 'player': return t('nav.player');
+      case 'ai': return t('nav.ai');
+      case 'settings': return t('nav.settings');
+      default: return id;
+    }
+  };
 
   return (
     <nav className="flex gap-1">
-      {tabs.map((tab) => (
+      {tabIds.map((id) => (
         <button
-          key={tab.id}
-          onClick={() => setActiveTab(tab.id)}
+          key={id}
+          onClick={() => setActiveTab(id)}
           className={`
             px-6 py-2 rounded-lg font-medium transition-colors
             ${
-              activeTab === tab.id
+              activeTab === id
                 ? 'bg-primary-500 text-white'
                 : 'bg-surface-700 text-gray-300 hover:bg-surface-600'
             }
           `}
         >
-          {tab.label}
+          {getTabLabel(id)}
         </button>
       ))}
     </nav>

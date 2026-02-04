@@ -8,8 +8,10 @@ import { PatternGrid } from './pattern-grid';
 import { BPMControl } from './bpm-control';
 import { SampleBrowser } from './sample-browser';
 import { BeatsAIPanel } from './beats-ai-panel';
+import { useTranslation } from '@/lib/i18n';
 
 export function BeatMaker() {
+  const { t } = useTranslation();
   const [bpm, setBpm] = useState(120);
   const [showAIPanel, setShowAIPanel] = useState(true);
   const [pattern, setPattern] = useState<boolean[][]>(
@@ -42,7 +44,7 @@ export function BeatMaker() {
   return (
     <div className="h-full flex flex-col gap-4">
       <div className="flex items-center justify-between p-4 bg-surface-800 border border-surface-700 rounded-lg">
-        <h2 className="text-xl font-semibold">Beat Maker</h2>
+        <h2 className="text-xl font-semibold">{t('beats.title')}</h2>
         <div className="flex items-center gap-4">
           <BPMControl bpm={bpm} onChange={setBpm} />
           <button
@@ -66,7 +68,7 @@ export function BeatMaker() {
               onClick={handleClear}
               className="px-4 py-2 bg-surface-700 hover:bg-surface-600 text-white rounded transition-colors"
             >
-              Clear Pattern
+              {t('beats.clearPattern')}
             </button>
             <button
               className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors"

@@ -6,8 +6,10 @@
 import { useState, useRef, useCallback } from 'react';
 import { LyricsToolbar } from './lyrics-toolbar';
 import { AISuggestionsPanel } from './ai-suggestions-panel';
+import { useTranslation } from '@/lib/i18n';
 
 export function LyricsEditor() {
+  const { t } = useTranslation();
   const [content, setContent] = useState('');
   const [selectedText, setSelectedText] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -82,7 +84,7 @@ export function LyricsEditor() {
           onSelect={handleSelectionChange}
           onMouseUp={handleSelectionChange}
           onKeyUp={handleSelectionChange}
-          placeholder="Start writing your lyrics here..."
+          placeholder={t('lyrics.placeholder')}
           className="flex-1 bg-surface-800 border border-surface-700 rounded-lg p-4 text-white placeholder-gray-500 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500"
         />
       </div>
