@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "Создание музыки с ИИ"
+  },
+  "nav": {
+    "lyrics": "Тексты",
+    "beats": "Биты",
+    "player": "Плеер",
+    "ai": "ИИ Чат",
+    "settings": "Настройки"
+  },
+  "lyrics": {
+    "title": "Редактор текстов",
+    "placeholder": "Начните писать текст здесь...",
+    "aiSuggestions": "Предложения ИИ",
+    "quickActions": "Быстрые действия",
+    "continue": "Продолжить",
+    "addChorus": "Добавить припев",
+    "addVerse": "Добавить куплет",
+    "findRhymes": "Найти рифмы",
+    "rewrite": "Переписать",
+    "clear": "Очистить",
+    "insert": "Вставить"
+  },
+  "beats": {
+    "title": "Создание битов",
+    "clearPattern": "Очистить паттерн",
+    "play": "Воспроизвести",
+    "aiGenerator": "ИИ Генератор",
+    "quickGenres": "Быстрые жанры",
+    "generatePattern": "Создать паттерн",
+    "generating": "Создание..."
+  },
+  "ai": {
+    "title": "ИИ Ассистент",
+    "askAnything": "Спросите что угодно...",
+    "thinking": "Думаю...",
+    "generate": "Создать",
+    "clear": "Очистить",
+    "context": "Контекст"
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "selectLanguage": "Выбрать язык",
+    "theme": "Тема",
+    "dark": "Тёмная",
+    "light": "Светлая",
+    "aiProvider": "Провайдер ИИ",
+    "connectedAccounts": "Подключённые аккаунты"
+  },
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "close": "Закрыть",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успех"
+  }
+}

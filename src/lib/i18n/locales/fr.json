@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "Création musicale par IA"
+  },
+  "nav": {
+    "lyrics": "Paroles",
+    "beats": "Rythmes",
+    "player": "Lecteur",
+    "ai": "Chat IA",
+    "settings": "Paramètres"
+  },
+  "lyrics": {
+    "title": "Éditeur de paroles",
+    "placeholder": "Commencez à écrire vos paroles ici...",
+    "aiSuggestions": "Suggestions IA",
+    "quickActions": "Actions rapides",
+    "continue": "Continuer",
+    "addChorus": "Ajouter refrain",
+    "addVerse": "Ajouter couplet",
+    "findRhymes": "Trouver rimes",
+    "rewrite": "Réécrire",
+    "clear": "Effacer",
+    "insert": "Insérer"
+  },
+  "beats": {
+    "title": "Créateur de rythmes",
+    "clearPattern": "Effacer motif",
+    "play": "Lecture",
+    "aiGenerator": "Générateur IA",
+    "quickGenres": "Genres rapides",
+    "generatePattern": "Générer motif",
+    "generating": "Génération..."
+  },
+  "ai": {
+    "title": "Assistant IA",
+    "askAnything": "Demandez n'importe quoi...",
+    "thinking": "Réflexion...",
+    "generate": "Générer",
+    "clear": "Effacer",
+    "context": "Contexte"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "selectLanguage": "Choisir la langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair",
+    "aiProvider": "Fournisseur IA",
+    "connectedAccounts": "Comptes connectés"
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès"
+  }
+}

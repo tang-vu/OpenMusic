@@ -5,9 +5,12 @@ import { Card } from '@/components/ui/card';
 import { Select } from '@/components/ui/select';
 import { OAuthLoginButton } from './oauth-login-button';
 import { ConnectedAccountsList } from './cliproxyapi-connected-accounts-list';
+import { LanguageSelector } from './language-selector';
 import { useAISettingsStore } from '@/stores/ai-settings-store';
+import { useTranslation } from '@/lib/i18n';
 
 export function SettingsPanel() {
+  const { t } = useTranslation();
   const [isInstalled, setIsInstalled] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [version, setVersion] = useState<string | null>(null);
@@ -122,7 +125,12 @@ export function SettingsPanel() {
 
   return (
     <div className="p-6 space-y-6 overflow-y-auto max-h-full">
-      <h2 className="text-xl font-semibold text-white">AI Settings</h2>
+      <h2 className="text-xl font-semibold text-white">{t('settings.title')}</h2>
+
+      {/* Language Selection */}
+      <Card className="p-4">
+        <LanguageSelector />
+      </Card>
 
       {/* CLIProxyAPI Status Card */}
       <Card className="p-4 space-y-4">

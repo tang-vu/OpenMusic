@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "Sáng tạo âm nhạc với AI"
+  },
+  "nav": {
+    "lyrics": "Lời bài hát",
+    "beats": "Beat",
+    "player": "Trình phát",
+    "ai": "AI Chat",
+    "settings": "Cài đặt"
+  },
+  "lyrics": {
+    "title": "Soạn lời bài hát",
+    "placeholder": "Bắt đầu viết lời bài hát ở đây...",
+    "aiSuggestions": "Gợi ý AI",
+    "quickActions": "Thao tác nhanh",
+    "continue": "Tiếp tục",
+    "addChorus": "Thêm điệp khúc",
+    "addVerse": "Thêm đoạn",
+    "findRhymes": "Tìm vần",
+    "rewrite": "Viết lại",
+    "clear": "Xóa",
+    "insert": "Chèn"
+  },
+  "beats": {
+    "title": "Tạo Beat",
+    "clearPattern": "Xóa mẫu",
+    "play": "Phát",
+    "aiGenerator": "Tạo Beat AI",
+    "quickGenres": "Thể loại nhanh",
+    "generatePattern": "Tạo mẫu",
+    "generating": "Đang tạo..."
+  },
+  "ai": {
+    "title": "Trợ lý AI",
+    "askAnything": "Hỏi AI bất cứ điều gì...",
+    "thinking": "Đang suy nghĩ...",
+    "generate": "Tạo",
+    "clear": "Xóa",
+    "context": "Ngữ cảnh"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "language": "Ngôn ngữ",
+    "selectLanguage": "Chọn ngôn ngữ",
+    "theme": "Giao diện",
+    "dark": "Tối",
+    "light": "Sáng",
+    "aiProvider": "Nhà cung cấp AI",
+    "connectedAccounts": "Tài khoản đã kết nối"
+  },
+  "common": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "loading": "Đang tải...",
+    "error": "Lỗi",
+    "success": "Thành công"
+  }
+}

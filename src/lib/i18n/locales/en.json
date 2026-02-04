@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "AI-Powered Music Creation"
+  },
+  "nav": {
+    "lyrics": "Lyrics",
+    "beats": "Beats",
+    "player": "Player",
+    "ai": "AI Chat",
+    "settings": "Settings"
+  },
+  "lyrics": {
+    "title": "Lyrics Editor",
+    "placeholder": "Start writing your lyrics here...",
+    "aiSuggestions": "AI Suggestions",
+    "quickActions": "Quick Actions",
+    "continue": "Continue",
+    "addChorus": "Add Chorus",
+    "addVerse": "Add Verse",
+    "findRhymes": "Find Rhymes",
+    "rewrite": "Rewrite",
+    "clear": "Clear",
+    "insert": "Insert"
+  },
+  "beats": {
+    "title": "Beat Maker",
+    "clearPattern": "Clear Pattern",
+    "play": "Play",
+    "aiGenerator": "AI Beat Generator",
+    "quickGenres": "Quick Genres",
+    "generatePattern": "Generate Pattern",
+    "generating": "Generating..."
+  },
+  "ai": {
+    "title": "AI Assistant",
+    "askAnything": "Ask AI anything...",
+    "thinking": "Thinking...",
+    "generate": "Generate",
+    "clear": "Clear",
+    "context": "Context"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "aiProvider": "AI Provider",
+    "connectedAccounts": "Connected Accounts"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  }
+}

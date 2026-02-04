@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "KI-gestützte Musikerstellung"
+  },
+  "nav": {
+    "lyrics": "Texte",
+    "beats": "Beats",
+    "player": "Player",
+    "ai": "KI-Chat",
+    "settings": "Einstellungen"
+  },
+  "lyrics": {
+    "title": "Text-Editor",
+    "placeholder": "Beginnen Sie hier mit dem Schreiben...",
+    "aiSuggestions": "KI-Vorschläge",
+    "quickActions": "Schnellaktionen",
+    "continue": "Fortsetzen",
+    "addChorus": "Refrain hinzufügen",
+    "addVerse": "Strophe hinzufügen",
+    "findRhymes": "Reime finden",
+    "rewrite": "Umschreiben",
+    "clear": "Löschen",
+    "insert": "Einfügen"
+  },
+  "beats": {
+    "title": "Beat-Maker",
+    "clearPattern": "Muster löschen",
+    "play": "Abspielen",
+    "aiGenerator": "KI-Generator",
+    "quickGenres": "Schnelle Genres",
+    "generatePattern": "Muster erstellen",
+    "generating": "Erstellen..."
+  },
+  "ai": {
+    "title": "KI-Assistent",
+    "askAnything": "Fragen Sie etwas...",
+    "thinking": "Denkt nach...",
+    "generate": "Erstellen",
+    "clear": "Löschen",
+    "context": "Kontext"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "selectLanguage": "Sprache wählen",
+    "theme": "Design",
+    "dark": "Dunkel",
+    "light": "Hell",
+    "aiProvider": "KI-Anbieter",
+    "connectedAccounts": "Verbundene Konten"
+  },
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg"
+  }
+}

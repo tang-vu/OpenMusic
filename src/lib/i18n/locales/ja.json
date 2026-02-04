@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "AIによる音楽制作"
+  },
+  "nav": {
+    "lyrics": "歌詞",
+    "beats": "ビート",
+    "player": "プレイヤー",
+    "ai": "AIチャット",
+    "settings": "設定"
+  },
+  "lyrics": {
+    "title": "歌詞エディター",
+    "placeholder": "ここに歌詞を書き始めてください...",
+    "aiSuggestions": "AI提案",
+    "quickActions": "クイックアクション",
+    "continue": "続ける",
+    "addChorus": "サビを追加",
+    "addVerse": "バースを追加",
+    "findRhymes": "韻を探す",
+    "rewrite": "書き直す",
+    "clear": "クリア",
+    "insert": "挿入"
+  },
+  "beats": {
+    "title": "ビートメーカー",
+    "clearPattern": "パターンをクリア",
+    "play": "再生",
+    "aiGenerator": "AIビート生成",
+    "quickGenres": "クイックジャンル",
+    "generatePattern": "パターン生成",
+    "generating": "生成中..."
+  },
+  "ai": {
+    "title": "AIアシスタント",
+    "askAnything": "何でも聞いてください...",
+    "thinking": "考え中...",
+    "generate": "生成",
+    "clear": "クリア",
+    "context": "コンテキスト"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語",
+    "selectLanguage": "言語を選択",
+    "theme": "テーマ",
+    "dark": "ダーク",
+    "light": "ライト",
+    "aiProvider": "AIプロバイダー",
+    "connectedAccounts": "接続済みアカウント"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功"
+  }
+}

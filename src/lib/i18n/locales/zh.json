@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "AI驱动的音乐创作"
+  },
+  "nav": {
+    "lyrics": "歌词",
+    "beats": "节拍",
+    "player": "播放器",
+    "ai": "AI聊天",
+    "settings": "设置"
+  },
+  "lyrics": {
+    "title": "歌词编辑器",
+    "placeholder": "在这里开始写歌词...",
+    "aiSuggestions": "AI建议",
+    "quickActions": "快捷操作",
+    "continue": "继续",
+    "addChorus": "添加副歌",
+    "addVerse": "添加段落",
+    "findRhymes": "找押韵",
+    "rewrite": "重写",
+    "clear": "清除",
+    "insert": "插入"
+  },
+  "beats": {
+    "title": "节拍制作",
+    "clearPattern": "清除节奏",
+    "play": "播放",
+    "aiGenerator": "AI节拍生成器",
+    "quickGenres": "快捷风格",
+    "generatePattern": "生成节奏",
+    "generating": "生成中..."
+  },
+  "ai": {
+    "title": "AI助手",
+    "askAnything": "问AI任何问题...",
+    "thinking": "思考中...",
+    "generate": "生成",
+    "clear": "清除",
+    "context": "上下文"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "selectLanguage": "选择语言",
+    "theme": "主题",
+    "dark": "深色",
+    "light": "浅色",
+    "aiProvider": "AI提供商",
+    "connectedAccounts": "已连接账户"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功"
+  }
+}

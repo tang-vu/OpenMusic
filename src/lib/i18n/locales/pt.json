@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "Criação musical com IA"
+  },
+  "nav": {
+    "lyrics": "Letras",
+    "beats": "Batidas",
+    "player": "Reprodutor",
+    "ai": "Chat IA",
+    "settings": "Configurações"
+  },
+  "lyrics": {
+    "title": "Editor de letras",
+    "placeholder": "Comece a escrever suas letras aqui...",
+    "aiSuggestions": "Sugestões IA",
+    "quickActions": "Ações rápidas",
+    "continue": "Continuar",
+    "addChorus": "Adicionar refrão",
+    "addVerse": "Adicionar verso",
+    "findRhymes": "Encontrar rimas",
+    "rewrite": "Reescrever",
+    "clear": "Limpar",
+    "insert": "Inserir"
+  },
+  "beats": {
+    "title": "Criador de batidas",
+    "clearPattern": "Limpar padrão",
+    "play": "Reproduzir",
+    "aiGenerator": "Gerador IA",
+    "quickGenres": "Gêneros rápidos",
+    "generatePattern": "Gerar padrão",
+    "generating": "Gerando..."
+  },
+  "ai": {
+    "title": "Assistente IA",
+    "askAnything": "Pergunte qualquer coisa...",
+    "thinking": "Pensando...",
+    "generate": "Gerar",
+    "clear": "Limpar",
+    "context": "Contexto"
+  },
+  "settings": {
+    "title": "Configurações",
+    "language": "Idioma",
+    "selectLanguage": "Selecionar idioma",
+    "theme": "Tema",
+    "dark": "Escuro",
+    "light": "Claro",
+    "aiProvider": "Provedor IA",
+    "connectedAccounts": "Contas conectadas"
+  },
+  "common": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso"
+  }
+}

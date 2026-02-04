@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "OpenMusic",
+    "tagline": "AI 기반 음악 창작"
+  },
+  "nav": {
+    "lyrics": "가사",
+    "beats": "비트",
+    "player": "플레이어",
+    "ai": "AI 채팅",
+    "settings": "설정"
+  },
+  "lyrics": {
+    "title": "가사 편집기",
+    "placeholder": "여기에 가사를 작성하세요...",
+    "aiSuggestions": "AI 제안",
+    "quickActions": "빠른 작업",
+    "continue": "계속",
+    "addChorus": "후렴 추가",
+    "addVerse": "절 추가",
+    "findRhymes": "라임 찾기",
+    "rewrite": "다시 쓰기",
+    "clear": "지우기",
+    "insert": "삽입"
+  },
+  "beats": {
+    "title": "비트 메이커",
+    "clearPattern": "패턴 지우기",
+    "play": "재생",
+    "aiGenerator": "AI 생성기",
+    "quickGenres": "빠른 장르",
+    "generatePattern": "패턴 생성",
+    "generating": "생성 중..."
+  },
+  "ai": {
+    "title": "AI 어시스턴트",
+    "askAnything": "무엇이든 물어보세요...",
+    "thinking": "생각 중...",
+    "generate": "생성",
+    "clear": "지우기",
+    "context": "컨텍스트"
+  },
+  "settings": {
+    "title": "설정",
+    "language": "언어",
+    "selectLanguage": "언어 선택",
+    "theme": "테마",
+    "dark": "다크",
+    "light": "라이트",
+    "aiProvider": "AI 제공자",
+    "connectedAccounts": "연결된 계정"
+  },
+  "common": {
+    "save": "저장",
+    "cancel": "취소",
+    "close": "닫기",
+    "loading": "로딩...",
+    "error": "오류",
+    "success": "성공"
+  }
+}
