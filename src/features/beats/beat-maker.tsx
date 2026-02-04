@@ -10,14 +10,12 @@ import { SampleBrowser } from './sample-browser';
 import { BeatsAIPanel } from './beats-ai-panel';
 import { useTranslation } from '@/lib/i18n';
 import { useBeatSequencer } from '@/hooks/use-beat-sequencer';
+import { useBeatsStore } from '@/stores/beats-store';
 
 export function BeatMaker() {
   const { t } = useTranslation();
-  const [bpm, setBpm] = useState(120);
+  const { bpm, pattern, setBpm, setPattern, toggleCell, clear } = useBeatsStore();
   const [showAIPanel, setShowAIPanel] = useState(true);
-  const [pattern, setPattern] = useState<boolean[][]>(
-    Array(8).fill(null).map(() => Array(16).fill(false))
-  );
   const [activeStep, setActiveStep] = useState(-1);
 
   const { isPlaying, toggle } = useBeatSequencer({
@@ -25,18 +23,6 @@ export function BeatMaker() {
     pattern,
     onStepChange: setActiveStep,
   });
-
-  const handleCellToggle = (row: number, col: number) => {
-    setPattern((prev) => {
-      const newPattern = prev.map((r) => [...r]);
-      newPattern[row][col] = !newPattern[row][col];
-      return newPattern;
-    });
-  };
-
-  const handleClear = () => {
-    setPattern(Array(8).fill(null).map(() => Array(16).fill(false)));
-  };
 
   const handlePatternGenerated = (
     grid: boolean[][],
@@ -71,12 +57,12 @@ export function BeatMaker() {
         <div className="flex-1 flex flex-col gap-4">
           <PatternGrid
             pattern={pattern}
-            onCellToggle={handleCellToggle}
+            onCellToggle={toggleCell}
             activeStep={activeStep}
           />
           <div className="flex gap-2">
             <button
-              onClick={handleClear}
+              onClick={clear}
               className="px-4 py-2 bg-surface-700 hover:bg-surface-600 text-white rounded transition-colors"
             >
               {t('beats.clearPattern')}
