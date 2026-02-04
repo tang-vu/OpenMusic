@@ -9,6 +9,7 @@ import { BPMControl } from './bpm-control';
 import { SampleBrowser } from './sample-browser';
 import { BeatsAIPanel } from './beats-ai-panel';
 import { useTranslation } from '@/lib/i18n';
+import { useBeatSequencer } from '@/hooks/use-beat-sequencer';
 
 export function BeatMaker() {
   const { t } = useTranslation();
@@ -17,6 +18,13 @@ export function BeatMaker() {
   const [pattern, setPattern] = useState<boolean[][]>(
     Array(8).fill(null).map(() => Array(16).fill(false))
   );
+  const [activeStep, setActiveStep] = useState(-1);
+
+  const { isPlaying, toggle } = useBeatSequencer({
+    bpm,
+    pattern,
+    onStepChange: setActiveStep,
+  });
 
   const handleCellToggle = (row: number, col: number) => {
     setPattern((prev) => {
@@ -35,7 +43,6 @@ export function BeatMaker() {
     patternInfo?: { name?: string; bpm?: number }
   ) => {
     setPattern(grid);
-    // Optionally update BPM if pattern suggests one
     if (patternInfo?.bpm && patternInfo.bpm !== bpm) {
       setBpm(patternInfo.bpm);
     }
@@ -62,7 +69,11 @@ export function BeatMaker() {
 
       <div className="flex gap-4 flex-1">
         <div className="flex-1 flex flex-col gap-4">
-          <PatternGrid pattern={pattern} onCellToggle={handleCellToggle} />
+          <PatternGrid
+            pattern={pattern}
+            onCellToggle={handleCellToggle}
+            activeStep={activeStep}
+          />
           <div className="flex gap-2">
             <button
               onClick={handleClear}
@@ -71,10 +82,14 @@ export function BeatMaker() {
               {t('beats.clearPattern')}
             </button>
             <button
-              className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded transition-colors"
-              disabled
+              onClick={toggle}
+              className={`px-4 py-2 rounded transition-colors ${
+                isPlaying
+                  ? 'bg-red-500 hover:bg-red-600 text-white'
+                  : 'bg-primary-500 hover:bg-primary-600 text-white'
+              }`}
             >
-              Play (Phase 06)
+              {isPlaying ? '⏹ Stop' : '▶ Play'}
             </button>
           </div>
         </div>
