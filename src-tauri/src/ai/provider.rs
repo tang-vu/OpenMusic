@@ -28,6 +28,16 @@ pub trait AIProvider: Send + Sync {
     /// Generate a completion for the given messages
     async fn complete(&self, messages: Vec<ChatMessage>) -> Result<AIResponse, AIError>;
 
+    /// Generate a completion with optional model override
+    async fn complete_with_model(
+        &self,
+        messages: Vec<ChatMessage>,
+        model: Option<String>,
+    ) -> Result<AIResponse, AIError> {
+        // Default implementation ignores model override
+        self.complete(messages).await
+    }
+
     /// Get the name of this provider
     fn name(&self) -> &str;
 

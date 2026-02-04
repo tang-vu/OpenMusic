@@ -8,11 +8,12 @@ use super::types::{AIResponse, ChatMessage};
 #[tauri::command]
 pub async fn ai_complete(
     messages: Vec<ChatMessage>,
+    model: Option<String>,
     state: State<'_, Mutex<AIProviderManager>>,
 ) -> Result<AIResponse, String> {
     let manager = state.lock().await;
     manager
-        .complete(messages)
+        .complete_with_model(messages, model)
         .await
         .map_err(|e| e.to_string())
 }

@@ -33,6 +33,72 @@ impl AIProviderManager {
         }
     }
 
+    /// Generate a completion with optional model override and auto-fallback
+    pub async fn complete_with_model(
+        &self,
+        messages: Vec<ChatMessage>,
+        model: Option<String>,
+    ) -> Result<AIResponse, AIError> {
+        // Build provider order: default first, then others
+        let mut provider_order: Vec<&Box<dyn AIProvider>> = Vec::new();
+
+        // Add default provider first if it exists
+        if let Some(default) = self.providers.iter().find(|p| p.name() == self.default_provider) {
+            provider_order.push(default);
+        }
+
+        // Add remaining providers
+        for provider in &self.providers {
+            if provider.name() != self.default_provider {
+                provider_order.push(provider);
+            }
+        }
+
+        if provider_order.is_empty() {
+            return Err(AIError::ProviderUnavailable("No providers configured".to_string()));
+        }
+
+        let mut last_error: Option<AIError> = None;
+        let mut tried_providers: Vec<String> = Vec::new();
+
+        // Try each provider with auto-fallback
+        for provider in provider_order {
+            let provider_name = provider.name().to_string();
+
+            // Check availability first
+            if !provider.is_available().await {
+                tried_providers.push(format!("{} (unavailable)", provider_name));
+                continue;
+            }
+
+            // Attempt completion with model override
+            match provider.complete_with_model(messages.clone(), model.clone()).await {
+                Ok(response) => {
+                    if !tried_providers.is_empty() {
+                        eprintln!(
+                            "[AI] Fallback success: {} (tried: {})",
+                            provider_name,
+                            tried_providers.join(" → ")
+                        );
+                    }
+                    return Ok(response);
+                }
+                Err(e) => {
+                    tried_providers.push(format!("{} ({})", provider_name, e));
+                    last_error = Some(e);
+                }
+            }
+        }
+
+        // All providers failed
+        Err(last_error.unwrap_or_else(|| {
+            AIError::ProviderUnavailable(format!(
+                "All providers failed: {}",
+                tried_providers.join(" → ")
+            ))
+        }))
+    }
+
     /// Generate a completion with auto-fallback to other providers on failure
     ///
     /// Tries providers in order: default first, then others by availability.

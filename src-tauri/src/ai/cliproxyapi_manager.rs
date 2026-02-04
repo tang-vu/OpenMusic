@@ -204,8 +204,10 @@ port: {}
 log-level: info
 auth-dir: ~/.openmusic-cliproxyapi
 
-# Add your OAuth accounts in auth-dir
-# See: https://help.router-for.me/
+# Management API - required for OAuth login
+remote-management:
+  allow-remote: false
+  secret-key: openmusic-local
 "#,
             self.port
         );

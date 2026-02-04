@@ -20,7 +20,7 @@ export const audioApi = {
 };
 
 export const aiApi = {
-  complete: (messages: ChatMessage[]) => invoke<AIResponse>('ai_complete', { messages }),
+  complete: (messages: ChatMessage[], model?: string) => invoke<AIResponse>('ai_complete', { messages, model }),
   listProviders: () => invoke<string[]>('list_ai_providers'),
   setProvider: (name: string) => invoke<void>('set_ai_provider', { name }),
 };
@@ -66,6 +66,7 @@ export interface OAuthUrlResponse {
 }
 
 const CLIPROXY_BASE = 'http://127.0.0.1:8080';
+const CLIPROXY_MANAGEMENT_KEY = 'openmusic-local';
 
 export const cliproxyHttpApi = {
   // List available models
@@ -76,36 +77,43 @@ export const cliproxyHttpApi = {
     return data.data || [];
   },
 
-  // List auth accounts (requires management key if set)
-  listAuthFiles: async (managementKey?: string): Promise<CLIProxyAuthFile[]> => {
-    const headers: Record<string, string> = {};
-    if (managementKey) headers['X-Management-Key'] = managementKey;
-
-    const res = await fetch(`${CLIPROXY_BASE}/v0/management/auth-files`, { headers });
+  // List auth accounts
+  listAuthFiles: async (): Promise<CLIProxyAuthFile[]> => {
+    const res = await fetch(`${CLIPROXY_BASE}/v0/management/auth-files`, {
+      headers: { 'X-Management-Key': CLIPROXY_MANAGEMENT_KEY }
+    });
     if (!res.ok) {
-      if (res.status === 401) return []; // No management key configured
+      if (res.status === 404) return []; // Management API not enabled
       throw new Error(`Failed to list auth files: ${res.status}`);
     }
-    return res.json();
+    const data = await res.json();
+    return data.files || [];
   },
 
   // Start OAuth login flow
   startOAuthLogin: async (provider: 'claude' | 'gemini' | 'codex' | 'antigravity'): Promise<OAuthUrlResponse> => {
     const endpoints: Record<string, string> = {
-      claude: '/v0/management/anthropic-auth-url',
-      gemini: '/v0/management/gemini-cli-auth-url',
-      codex: '/v0/management/codex-auth-url',
-      antigravity: '/v0/management/antigravity-auth-url',
+      claude: '/v0/management/anthropic-auth-url?is_webui=true',
+      gemini: '/v0/management/gemini-cli-auth-url?is_webui=true',
+      codex: '/v0/management/codex-auth-url?is_webui=true',
+      antigravity: '/v0/management/antigravity-auth-url?is_webui=true',
     };
 
-    const res = await fetch(`${CLIPROXY_BASE}${endpoints[provider]}`);
-    if (!res.ok) throw new Error(`Failed to start OAuth: ${res.status}`);
+    const res = await fetch(`${CLIPROXY_BASE}${endpoints[provider]}`, {
+      headers: { 'X-Management-Key': CLIPROXY_MANAGEMENT_KEY }
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || `Failed to start OAuth: ${res.status}`);
+    }
     return res.json();
   },
 
   // Check OAuth status
   checkOAuthStatus: async (state: string): Promise<{ status: string; error?: string }> => {
-    const res = await fetch(`${CLIPROXY_BASE}/v0/management/get-auth-status?state=${state}`);
+    const res = await fetch(`${CLIPROXY_BASE}/v0/management/get-auth-status?state=${state}`, {
+      headers: { 'X-Management-Key': CLIPROXY_MANAGEMENT_KEY }
+    });
     if (!res.ok) throw new Error(`Failed to check OAuth status: ${res.status}`);
     return res.json();
   },
@@ -120,5 +128,17 @@ export const cliproxyHttpApi = {
     } catch {
       return false;
     }
+  },
+
+  // Delete auth file by name
+  deleteAuthFile: async (name: string): Promise<void> => {
+    const res = await fetch(
+      `${CLIPROXY_BASE}/v0/management/auth-files?name=${encodeURIComponent(name)}`,
+      {
+        method: 'DELETE',
+        headers: { 'X-Management-Key': CLIPROXY_MANAGEMENT_KEY }
+      }
+    );
+    if (!res.ok) throw new Error(`Failed to delete auth file: ${res.status}`);
   },
 };

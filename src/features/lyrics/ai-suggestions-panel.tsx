@@ -1,14 +1,65 @@
-import { Card } from '../../components/ui/card';
+/**
+ * AI Suggestions Panel for Lyrics Editor
+ * Provides AI-powered lyrics assistance with quick actions and custom prompts
+ */
+
+import { useState } from 'react';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useAISkills } from '@/hooks/use-ai-skills';
+import { LyricsAIQuickActions } from './lyrics-ai-quick-actions';
 
 interface AISuggestionsPanelProps {
   onClose: () => void;
+  currentLyrics?: string;
+  selectedText?: string;
+  onInsertSuggestion?: (text: string) => void;
 }
 
-export function AISuggestionsPanel({ onClose }: AISuggestionsPanelProps) {
+export function AISuggestionsPanel({
+  onClose,
+  currentLyrics,
+  selectedText,
+  onInsertSuggestion,
+}: AISuggestionsPanelProps) {
+  const [customPrompt, setCustomPrompt] = useState('');
+  const [suggestion, setSuggestion] = useState<string | null>(null);
+  const { complete, isLoading, error, activeSkill } = useAISkills({
+    defaultContext: { currentLyrics },
+  });
+
+  const handleAction = async (prompt: string) => {
+    try {
+      const response = await complete(prompt, {
+        skillId: 'lyrics',
+        context: { currentLyrics },
+      });
+      setSuggestion(response.content);
+    } catch {
+      // Error handled by hook
+    }
+  };
+
+  const handleCustomSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (customPrompt.trim()) {
+      handleAction(customPrompt);
+      setCustomPrompt('');
+    }
+  };
+
+  const handleInsert = () => {
+    if (suggestion && onInsertSuggestion) {
+      onInsertSuggestion(suggestion);
+      setSuggestion(null);
+    }
+  };
+
   return (
     <div className="w-80 flex flex-col gap-4">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">AI Suggestions</h3>
+        <h3 className="text-lg font-semibold">AI Lyrics Assistant</h3>
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-white transition-colors"
@@ -19,22 +70,85 @@ export function AISuggestionsPanel({ onClose }: AISuggestionsPanelProps) {
           </svg>
         </button>
       </div>
+
+      {/* Quick Actions */}
       <Card>
-        <p className="text-gray-400 text-sm">
-          AI suggestions will appear here when connected in Phase 06.
-        </p>
-        <div className="mt-4 space-y-2">
-          <div className="p-3 bg-surface-700 rounded border border-surface-600">
-            <p className="text-sm text-gray-300">Rhyme suggestions</p>
-          </div>
-          <div className="p-3 bg-surface-700 rounded border border-surface-600">
-            <p className="text-sm text-gray-300">Theme ideas</p>
-          </div>
-          <div className="p-3 bg-surface-700 rounded border border-surface-600">
-            <p className="text-sm text-gray-300">Verse completions</p>
-          </div>
-        </div>
+        <p className="text-sm text-gray-400 mb-3">Quick Actions</p>
+        <LyricsAIQuickActions
+          onAction={handleAction}
+          currentLyrics={currentLyrics}
+          selectedText={selectedText}
+          isLoading={isLoading}
+        />
       </Card>
+
+      {/* Custom Prompt */}
+      <Card>
+        <form onSubmit={handleCustomSubmit}>
+          <textarea
+            value={customPrompt}
+            onChange={(e) => setCustomPrompt(e.target.value)}
+            placeholder="Ask anything about lyrics..."
+            className="w-full bg-surface-700 border border-surface-600 rounded p-2 text-sm text-white placeholder-gray-500 resize-none focus:outline-none focus:ring-1 focus:ring-primary-500"
+            rows={2}
+            disabled={isLoading}
+          />
+          <Button
+            type="submit"
+            size="sm"
+            className="mt-2 w-full"
+            disabled={isLoading || !customPrompt.trim()}
+          >
+            {isLoading ? 'Generating...' : 'Generate'}
+          </Button>
+        </form>
+      </Card>
+
+      {/* Error Display */}
+      {error && (
+        <Card className="border-red-500/50">
+          <p className="text-sm text-red-400">{error}</p>
+        </Card>
+      )}
+
+      {/* Suggestion Result */}
+      {suggestion && (
+        <Card>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-sm text-gray-400">
+              {activeSkill?.name || 'Suggestion'}
+            </p>
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setSuggestion(null)}
+              >
+                Clear
+              </Button>
+              {onInsertSuggestion && (
+                <Button size="sm" onClick={handleInsert}>
+                  Insert
+                </Button>
+              )}
+            </div>
+          </div>
+          <div className="p-3 bg-surface-700 rounded border border-surface-600 max-h-64 overflow-y-auto">
+            <pre className="text-sm text-gray-200 whitespace-pre-wrap font-sans">
+              {suggestion}
+            </pre>
+          </div>
+        </Card>
+      )}
+
+      {/* Empty State */}
+      {!suggestion && !isLoading && !error && (
+        <Card>
+          <p className="text-gray-500 text-sm text-center py-4">
+            Use quick actions or type a custom prompt to get AI suggestions
+          </p>
+        </Card>
+      )}
     </div>
   );
 }

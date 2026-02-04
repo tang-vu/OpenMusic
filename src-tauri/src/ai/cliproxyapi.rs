@@ -46,8 +46,18 @@ impl CLIProxyAPIProvider {
 #[async_trait]
 impl AIProvider for CLIProxyAPIProvider {
     async fn complete(&self, messages: Vec<ChatMessage>) -> Result<AIResponse, AIError> {
+        self.complete_with_model(messages, None).await
+    }
+
+    async fn complete_with_model(
+        &self,
+        messages: Vec<ChatMessage>,
+        model: Option<String>,
+    ) -> Result<AIResponse, AIError> {
+        let model_to_use = model.unwrap_or_else(|| self.model.clone());
+
         let request = ChatCompletionRequest {
-            model: self.model.clone(),
+            model: model_to_use.clone(),
             messages,
             temperature: Some(0.7),
             max_tokens: Some(4096),
@@ -79,7 +89,7 @@ impl AIProvider for CLIProxyAPIProvider {
 
         Ok(AIResponse {
             content: choice.message.content.clone(),
-            provider: format!("cliproxyapi:{}", self.model),
+            provider: format!("cliproxyapi:{}", model_to_use),
             tokens: completion.usage.and_then(|u| u.total_tokens),
         })
     }

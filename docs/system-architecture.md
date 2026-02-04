@@ -27,10 +27,59 @@
         ┌─────────────────────┼─────────────────────┐
         ▼                     ▼                     ▼
    ┌─────────┐          ┌─────────┐          ┌─────────┐
-   │ Ollama  │          │ OpenAI  │          │ Local   │
-   │ (Local) │          │ Claude  │          │  Files  │
-   └─────────┘          │ Gemini  │          └─────────┘
+   │CLIProxy │          │ Claude  │          │ Local   │
+   │  API    │          │ Gemini  │          │  Files  │
+   └─────────┘          │ Codex   │          └─────────┘
                         └─────────┘
+```
+
+## Mermaid Diagrams
+
+### Component Architecture
+
+```mermaid
+graph TB
+    subgraph Frontend["React Frontend"]
+        UI[UI Components]
+        Features[Feature Modules]
+        Stores[Zustand Stores]
+        Hooks[React Hooks]
+    end
+
+    subgraph IPC["Tauri IPC Layer"]
+        Commands[Tauri Commands]
+    end
+
+    subgraph Backend["Rust Backend"]
+        Audio[Audio Engine]
+        MIDI[MIDI Handler]
+        AI[AI Providers]
+    end
+
+    UI --> Features
+    Features --> Hooks
+    Hooks --> Stores
+    Features --> Commands
+    Commands --> Audio
+    Commands --> MIDI
+    Commands --> AI
+```
+
+### AI Provider Flow
+
+```mermaid
+sequenceDiagram
+    participant UI as Chat UI
+    participant Tauri as Tauri IPC
+    participant Mgr as AI Manager
+    participant Proxy as CLIProxyAPI
+
+    UI->>Tauri: invoke('ai_complete')
+    Tauri->>Mgr: complete(message)
+    Mgr->>Proxy: POST /complete
+    Proxy-->>Mgr: AI response
+    Mgr-->>Tauri: Ok(response)
+    Tauri-->>UI: display message
 ```
 
 ---

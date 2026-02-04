@@ -40,7 +40,7 @@ impl Default for AIConfig {
         Self {
             default_provider: "cliproxyapi".to_string(),
             cliproxyapi_url: Some("http://localhost:8080".to_string()),
-            cliproxyapi_model: Some("claude-sonnet-4".to_string()),
+            cliproxyapi_model: Some("gpt-5".to_string()),
             openai_api_key: None,
             openai_model: Some("gpt-4o-mini".to_string()),
         }
