@@ -7,21 +7,22 @@ import { useState, useRef, useCallback } from 'react';
 import { LyricsToolbar } from './lyrics-toolbar';
 import { AISuggestionsPanel } from './ai-suggestions-panel';
 import { useTranslation } from '@/lib/i18n';
+import { useLyricsStore } from '@/stores/lyrics-store';
 
 export function LyricsEditor() {
   const { t } = useTranslation();
-  const [content, setContent] = useState('');
+  const { content, setContent, clear } = useLyricsStore();
   const [selectedText, setSelectedText] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInsertSection = (section: string) => {
-    setContent((prev) => prev + `\n\n[${section}]\n`);
+    setContent(content + `\n\n[${section}]\n`);
   };
 
   const handleClear = () => {
     if (confirm('Clear all lyrics?')) {
-      setContent('');
+      clear();
     }
   };
 
@@ -43,7 +44,7 @@ export function LyricsEditor() {
     const textarea = textareaRef.current;
     if (!textarea) {
       // No selection, append to end
-      setContent((prev) => prev + '\n\n' + suggestion);
+      setContent(content + '\n\n' + suggestion);
       return;
     }
 

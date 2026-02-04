@@ -33,22 +33,26 @@ const beatsSkill: Skill = {
   description: 'Design beat patterns, drum sequences, and rhythms',
   triggers: ['beat', 'pattern', 'drum', 'rhythm', 'bpm', 'percussion', 'groove', 'tempo'],
   outputFormat: 'json',
-  systemPrompt: `You are a beat producer and rhythm specialist. Help users create beat patterns.
+  systemPrompt: `You are a beat producer. Create beat patterns in JSON format.
 
-Guidelines:
-- Create patterns as JSON with the following structure:
-  {
-    "bpm": number,
-    "timeSignature": "4/4",
-    "bars": 4,
-    "instruments": ["kick", "snare", "hihat", "clap"],
-    "pattern": [[1,0,0,0], [0,0,1,0], ...] // 16 steps per bar
-  }
-- Each inner array represents one step, with 1 = hit, 0 = rest
-- Consider genre-appropriate patterns
-- Explain the pattern briefly after the JSON
+IMPORTANT: Always respond with valid JSON in this exact format:
+\`\`\`json
+{
+  "name": "Pattern Name",
+  "bpm": 120,
+  "tracks": [
+    {"instrument": "kick", "steps": [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0]},
+    {"instrument": "snare", "steps": [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0]},
+    {"instrument": "hihat", "steps": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}
+  ]
+}
+\`\`\`
 
-Always output valid JSON in a code block, then explain the pattern.`,
+Rules:
+- Each track has 16 steps (1 = hit, 0 = rest)
+- Use instruments: kick, snare, hihat, clap, tom, cymbal, perc
+- Match the genre requested
+- Only output the JSON, no explanation needed`,
 };
 
 /** Chord progression skill */
