@@ -59,6 +59,7 @@ OpenMusic codebase: ~63 source files (39 TypeScript/TSX frontend, 23 Rust backen
 | `pattern-grid.tsx` | Step sequencer grid |
 | `bpm-control.tsx` | Tempo controls |
 | `sample-browser.tsx` | Sound sample list |
+| `beats-ai-panel.tsx` | 6 genre presets (Trap, Boom Bap, House, Lo-Fi, Drill, Funk) |
 
 #### Lyrics Module
 | File | Purpose |
@@ -66,6 +67,7 @@ OpenMusic codebase: ~63 source files (39 TypeScript/TSX frontend, 23 Rust backen
 | `lyrics-editor.tsx` | Main text editor |
 | `lyrics-toolbar.tsx` | Editor actions |
 | `ai-suggestions-panel.tsx` | AI lyric suggestions |
+| `lyrics-ai-quick-actions.tsx` | 5 quick AI actions (Continue, Rhyme, Rewrite, Expand, Summarize) |
 
 #### Player Module
 | File | Purpose |
@@ -81,12 +83,21 @@ OpenMusic codebase: ~63 source files (39 TypeScript/TSX frontend, 23 Rust backen
 | `settings-panel.tsx` | Settings UI |
 | `index.ts` | Module exports |
 
+### AI Components (src/components/ai/)
+
+| File | Purpose |
+|------|---------|
+| `ai-command-palette.tsx` | Global AI command palette (Cmd+K) |
+| `ai-command-palette-trigger.tsx` | Trigger button for palette |
+
 ### Hooks (src/hooks/)
 
 | File | Purpose |
 |------|---------|
 | `use-audio.ts` | Audio playback hook |
 | `use-ai.ts` | AI provider hook |
+| `use-ai-skills.ts` | Skill-aware AI hook with routing |
+| `use-app-context.ts` | Context detection for command palette |
 | `use-theme.ts` | Theme switching hook |
 
 ### Stores (src/stores/)
@@ -96,12 +107,26 @@ OpenMusic codebase: ~63 source files (39 TypeScript/TSX frontend, 23 Rust backen
 | `player-store.ts` | Player state (playback, volume, track) |
 | `settings-store.ts` | App settings persistence |
 | `ui-store.ts` | UI state (active tab, sidebar) |
+| `ai-palette-store.ts` | Command palette state |
+| `ai-settings-store.ts` | AI provider/skill settings |
 
 ### Lib (src/lib/)
 
 | File | Purpose |
 |------|---------|
 | `tauri-api.ts` | Tauri command wrappers |
+
+### AI Skills (src/lib/ai-skills/)
+
+| File | Purpose |
+|------|---------|
+| `types.ts` | Skill, SkillContext, SkillResponse interfaces |
+| `skill-registry.ts` | 4 skills (lyrics, beats, chords, general) with triggers |
+| `skill-router.ts` | Keyword-based intent routing |
+| `context-builders.ts` | App state to prompt injection |
+| `response-parsers.ts` | JSON/lyrics/chord extraction with ReDoS protection |
+| `beat-pattern-parser.ts` | JSON to instrument grid conversion |
+| `index.ts` | Barrel exports |
 
 ---
 

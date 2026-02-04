@@ -103,6 +103,46 @@ sequenceDiagram
 - **Cloud:** OpenAI, Claude, Gemini via HTTP
 - **Features:** Lyrics, chord suggestions, composition help
 
+### 4. AI Skills System (Frontend)
+
+```mermaid
+graph LR
+    subgraph Skills["AI Skills Layer"]
+        Router[Skill Router]
+        Registry[Skill Registry]
+        Context[Context Builders]
+        Parser[Response Parsers]
+    end
+
+    subgraph UI["UI Components"]
+        Palette[Command Palette]
+        LyricsAI[Lyrics AI Panel]
+        BeatsAI[Beats AI Panel]
+    end
+
+    UI --> Router
+    Router --> Registry
+    Router --> Context
+    Router --> Parser
+    Parser --> UI
+```
+
+**Components:**
+- **Skill Registry:** 4 skills (lyrics, beats, chords, general) with triggers/prompts
+- **Skill Router:** Keyword-based intent detection, routes to appropriate skill
+- **Context Builders:** Injects app state (current lyrics, beat pattern, BPM) into prompts
+- **Response Parsers:** JSON/lyrics/chord extraction with ReDoS protection
+- **Beat Pattern Parser:** Converts JSON responses to instrument grid mapping
+
+**Skills:**
+
+| Skill | Triggers | Purpose |
+|-------|----------|---------|
+| `lyrics` | write, lyrics, verse, chorus, rhyme | Lyric generation/editing |
+| `beats` | beat, drum, pattern, rhythm, groove | Beat pattern generation |
+| `chords` | chord, harmony, progression, key | Chord suggestions |
+| `general` | (fallback) | General music assistance |
+
 ### 4. Project Manager (Rust)
 - **Storage:** SQLite for metadata
 - **Files:** Audio, MIDI, project files on disk
@@ -132,6 +172,22 @@ sequenceDiagram
 - Provider selector
 - History persistence
 
+### AI Command Palette
+- Global shortcut (Cmd+K) activation
+- Context-aware suggestions based on active feature
+- Quick actions for lyrics (5 actions) and beats (6 genre presets)
+- Skill-aware routing for specialized responses
+
+### Lyrics AI Panel
+- 5 quick actions: Continue, Rhyme, Rewrite, Expand, Summarize
+- Custom prompt input
+- Context injection from current lyrics
+
+### Beats AI Panel
+- 6 genre presets: Trap, Boom Bap, House, Lo-Fi, Drill, Funk
+- Pattern generation with instrument mapping
+- Direct grid integration
+
 ---
 
 ## Data Flow
@@ -158,10 +214,13 @@ Grid Edit → React State → IPC invoke('update_pattern') → Rust → MIDI →
 ```
 src/                    # React frontend
 ├── components/         # UI components
+│   └── ai/             # AI command palette components
 ├── features/           # Feature modules (lyrics, beats, ai)
 ├── hooks/              # Custom React hooks
 ├── stores/             # Zustand stores
-└── lib/                # Utilities
+└── lib/
+    ├── ai-skills/      # AI skills system
+    └── ...             # Other utilities
 
 src-tauri/              # Rust backend
 ├── src/

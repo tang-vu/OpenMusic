@@ -25,7 +25,7 @@
 
 ## Phase 2: Core Features (In Progress)
 
-**Status:** 60% Complete
+**Status:** 75% Complete
 
 ### Audio System
 
@@ -56,12 +56,16 @@
 | Provider selector | Done | High |
 | Auto-download binary | In Progress | Medium |
 | Update checking | Planned | Low |
+| AI Skills System | Done | High |
+| Command Palette (Cmd+K) | Done | High |
+| Lyrics AI Quick Actions | Done | High |
+| Beats AI Panel (6 presets) | Done | High |
 
 ---
 
 ## Phase 3: Feature Modules (Planned)
 
-**Status:** 20% Complete
+**Status:** 45% Complete
 
 ### Lyrics Editor
 
@@ -69,7 +73,8 @@
 |------|--------|----------|
 | Basic text editor | Done | High |
 | Toolbar with actions | In Progress | Medium |
-| AI suggestions panel | Planned | High |
+| AI suggestions panel | Done | High |
+| AI quick actions (5 actions) | Done | High |
 | File save/load | Planned | Medium |
 
 ### Beat Maker
@@ -80,6 +85,7 @@
 | BPM control | Done | High |
 | Sample browser | In Progress | Medium |
 | Step sequencer logic | Planned | High |
+| AI panel (6 genre presets) | Done | High |
 
 ---
 
