@@ -51,6 +51,34 @@ npm run tauri build
 | `npm run tauri dev` | Run Tauri in dev mode |
 | `npm run tauri build` | Build production app |
 | `npm run typecheck` | TypeScript type checking |
+| `npm test` | Offline project workspace and component tests |
+| `npm run test:browser` | Chromium workspace preservation checks |
+
+### Project workspace preservation
+
+Switching between existing named projects saves the outgoing lyrics, BPM, and beat
+pattern before loading the selected project. Selecting the active project keeps
+the current draft. Save Project, Create Project, and Close Project retain their
+existing save behavior. This does not add file import/export, general autosave,
+or recovery for an unassigned "No Project" draft.
+
+### Frontend checks
+
+Use Node.js 22.12 or newer for the test tooling and CI checks.
+
+```bash
+npm ci
+npm run typecheck
+npm test
+npm run build
+npx playwright install --with-deps chromium
+npm run test:browser
+```
+
+Browser checks mount the real project selector, lyrics editor, and beat controls
+with synthetic localStorage data. They do not launch Tauri, audio playback, MIDI,
+or AI services. The Frontend workflow runs these checks and uploads browser
+screenshots and reports. Native compilation is a separate check.
 
 ## Project Structure
 

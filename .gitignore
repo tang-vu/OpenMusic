@@ -33,7 +33,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # package manager
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
@@ -89,3 +88,6 @@ src-tauri/target/
 
 # Large manifest files
 release-manifest.json
+# Frontend test output
+playwright-report/
+test-results/
