@@ -17,7 +17,7 @@ function WorkspaceFixture() {
         <ProjectSelector />
       </header>
       <p className="text-sm text-gray-400">Synthetic offline test data</p>
-      <section style={{ height: 430 }} aria-label="Lyrics"><LyricsEditor /></section>
+      <section style={{ height: 520 }} aria-label="Lyrics"><LyricsEditor /></section>
       <section className="space-y-3" aria-label="Beats">
         <BPMControl bpm={bpm} onChange={setBpm} />
         <PatternGrid pattern={pattern} onCellToggle={toggleCell} />

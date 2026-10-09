@@ -64,6 +64,8 @@ or recovery for an unassigned "No Project" draft.
 
 ### Frontend checks
 
+Use Node.js 22.12 or newer for the test tooling and CI checks.
+
 ```bash
 npm ci
 npm run typecheck
