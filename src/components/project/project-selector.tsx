@@ -4,9 +4,10 @@
  */
 
 import { useState } from 'react';
-import { useProjectStore, type MusicProject } from '@/stores/project-store';
+import { useProjectStore } from '@/stores/project-store';
 import { useLyricsStore } from '@/stores/lyrics-store';
 import { useBeatsStore } from '@/stores/beats-store';
+import { switchProjectWorkspace } from '@/lib/project-workspace';
 
 export function ProjectSelector() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,13 +19,12 @@ export function ProjectSelector() {
     currentProjectId,
     createProject,
     deleteProject,
-    loadProject,
     saveCurrentProject,
     setCurrentProject,
   } = useProjectStore();
 
-  const { content: lyrics, setContent: setLyrics, clear: clearLyrics } = useLyricsStore();
-  const { bpm, pattern, setBpm, setPattern, clear: clearBeats } = useBeatsStore();
+  const { content: lyrics, clear: clearLyrics } = useLyricsStore();
+  const { bpm, pattern, clear: clearBeats } = useBeatsStore();
 
   const currentProject = projects.find((p) => p.id === currentProjectId);
 
@@ -39,12 +39,8 @@ export function ProjectSelector() {
   };
 
   // Load project data into stores
-  const handleLoadProject = (project: MusicProject) => {
-    loadProject(project.id);
-    setLyrics(project.data.lyrics);
-    setBpm(project.data.beats.bpm);
-    setPattern(project.data.beats.pattern);
-    setIsOpen(false);
+  const handleLoadProject = (projectId: string) => {
+    if (switchProjectWorkspace(projectId)) setIsOpen(false);
   };
 
   // Create new project
@@ -116,7 +112,7 @@ export function ProjectSelector() {
               projects.map((project) => (
                 <div
                   key={project.id}
-                  onClick={() => handleLoadProject(project)}
+                  onClick={() => handleLoadProject(project.id)}
                   className={`flex items-center justify-between px-3 py-2 hover:bg-surface-700 cursor-pointer ${
                     project.id === currentProjectId ? 'bg-surface-700' : ''
                   }`}
